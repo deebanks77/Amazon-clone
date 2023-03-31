@@ -1,0 +1,27 @@
+.home__imageContainer {
+  max-width: 1500px;
+  margin: 0 auto;
+  margin-bottom: -200px;
+}
+
+.home__image {
+  width: 100%;
+  height: fit-content;
+  object-fit: contain;
+  mask-image: linear-gradient(
+    to bottom right,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0.3)
+  );
+  z-index: -1;
+}
+
+.home__products {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+  grid-template-columns: auto auto auto;
+  /* grid-template-rows: auto; */
+  gap: 15px;
+  padding: 20px;
+  overflow: scroll;
+}
