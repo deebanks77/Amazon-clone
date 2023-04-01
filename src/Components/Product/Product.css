@@ -3,6 +3,13 @@
   min-width: 300px;
   padding: 0 20px 20px 20px;
   z-index: 10;
+  padding: 20px;
+}
+
+.product__info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .product__title {
@@ -28,11 +35,11 @@
   display: block;
   margin: 10px auto;
   padding: 4px 10px;
-  background-color: goldenrod;
+  background-color: #ffd712;
   border: 1px solid transparent;
   border-radius: 5px;
 }
 .product__button:hover {
-  color: white;
+  background-color: goldenrod;
   cursor: pointer;
 }

@@ -1,11 +1,22 @@
 import React from "react";
 import "./CheckoutProduct.css";
 import { AiFillStar } from "react-icons/ai";
+import useStateValue from "../../StateProvider/StateProvider";
 
 function CheckoutProduct({ id, title, price, image, rating }) {
+  const [{}, dispatch] = useStateValue();
+
+  const removeFromCart = () => {
+    dispatch({
+      type: "REMOVE_FROM_CART",
+      id: id,
+    });
+  };
+
   return (
     <div className="checkoutProduct">
-      <img src={image} alt="title" />
+      <img src={image} alt="title" className="checkoutProduct__image" />
+
       <div className="checkoutProduct__info">
         <p className="checkoutProduct__title">{title}</p>
         <div className="checkoutProduct__price">
@@ -15,11 +26,13 @@ function CheckoutProduct({ id, title, price, image, rating }) {
         <div className="checkoutProduct__rating">
           {Array(rating)
             .fill()
-            .map((_) => {
-              return <AiFillStar />;
+            .map((_, i) => {
+              return <AiFillStar key={i} />;
             })}
         </div>
-        <button>Remove From Cart</button>
+        <button onClick={removeFromCart} className="checkoutProduct__button">
+          Remove From Cart
+        </button>
       </div>
     </div>
   );
