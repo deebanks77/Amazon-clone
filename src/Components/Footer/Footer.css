@@ -68,3 +68,9 @@
 .footer__buttons > button:hover {
   cursor: pointer;
 }
+
+@media only screen and (max-width: 950px) {
+  .footer__top .info4 {
+    display: none;
+  }
+}

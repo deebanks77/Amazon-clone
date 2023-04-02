@@ -1,12 +1,37 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
 import { SlBasket } from "react-icons/sl";
+import { MdOutlineCancel } from "react-icons/md";
+import { AiFillSetting } from "react-icons/ai";
+import { IoLogOut } from "react-icons/io5";
 import useStateValue from "../../StateProvider/StateProvider";
+import { auth } from "../../firebase";
+import { signOut } from "firebase/auth";
 
 function Header() {
-  const [{ basket }] = useStateValue();
+  const [{ basket }, dispatch] = useStateValue();
+  const [show, setShow] = useState(false);
+
+  const inputRef = useRef(false);
+
+  const handleFocus = () => {
+    inputRef.current.focus();
+  };
+
+  const signout = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        dispatch({ type: "SIGN_OUT" });
+        alert("signed out");
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+
   return (
     <nav className="header">
       {/* logo */}
@@ -18,18 +43,18 @@ function Header() {
 
       {/* input */}
       <div className="header__search">
-        <input type="text" className="header__searchInput" />
-        <BiSearch className="header__searchIcon" />
+        <input type="text" className="header__searchInput" ref={inputRef} />
+        <BiSearch className="header__searchIcon" onClick={handleFocus} />
       </div>
 
       {/* buttons */}
       <div className="header__nav">
-        <Link to="/login" className="header__link">
+        <div onClick={() => setShow(!show)} className="header__link">
           <div className="header__option">
             <span className="header__optionLineOne">Hello,</span>
             <span className="header__optionLineTwo">Sign In</span>
           </div>
-        </Link>
+        </div>
         <Link to="/" className="header__link">
           <div className="header__option">
             <span className="header__optionLineOne">Returns</span>
@@ -48,6 +73,24 @@ function Header() {
             <span className="header__optionLineTwo">{basket.length}</span>
           </div>
         </Link>
+
+        {/* drop down */}
+        <div
+          className={`${show ? " header__Logout show" : "header__Logout "} `}
+        >
+          <MdOutlineCancel
+            className="icon__cancel"
+            onClick={() => setShow(!show)}
+          />
+          <div className="button">
+            <AiFillSetting className="icon" />
+            <p>Settings & Privacy</p>
+          </div>
+          <div className="button" onClick={signout}>
+            <IoLogOut className="icon" />
+            <p>Logout</p>
+          </div>
+        </div>
       </div>
       {/* basket */}
     </nav>

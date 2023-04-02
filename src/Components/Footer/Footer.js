@@ -11,26 +11,26 @@ function Footer() {
       <div className="footer__top">
         <div className="info">
           <h3>Get to Know Us</h3>
-          {footerInfo.map((item) => {
-            return <p>{item}</p>;
+          {footerInfo.map((item, index) => {
+            return <p key={index}>{item}</p>;
           })}
         </div>
-        <div className="info">
+        <div className="info info2">
           <h3>Make Money with Us</h3>
-          {footerInfo2.map((item) => {
-            return <p>{item}</p>;
+          {footerInfo2.map((item, index) => {
+            return <p key={index}>{item}</p>;
           })}
         </div>
-        <div className="info">
+        <div className="info info3">
           <h3>Amazon Payment Products</h3>
-          {footerInfo3.map((item) => {
-            return <p>{item}</p>;
+          {footerInfo3.map((item, index) => {
+            return <p key={index}>{item}</p>;
           })}
         </div>
-        <div className="info">
+        <div className="info info4">
           <h3>Let Us Help You</h3>
-          {footerInfo4.map((item) => {
-            return <p>{item}</p>;
+          {footerInfo4.map((item, index) => {
+            return <p key={index}>{item}</p>;
           })}
         </div>
       </div>

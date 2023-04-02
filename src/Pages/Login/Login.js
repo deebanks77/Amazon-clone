@@ -1,13 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../../firebase";
+import useStateValue from "../../StateProvider/StateProvider";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [{ user }, dispatch] = useStateValue();
+
+  const navigate = useNavigate();
+
+  const handleSignin = (e) => {
+    // e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const { accessToken } = userCredential.user;
+
+        dispatch({ type: "SIGN_IN", user: accessToken });
+        setEmail("");
+        setPassword("");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // setEmail("");
+        // setPassword("");
+      });
   };
+
+  const handleCreateAccount = (e) => {
+    // e.preventDefault();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const { accessToken } = userCredential.user;
+
+        dispatch({ type: "SIGN_UP", user: accessToken });
+        setEmail("");
+        setPassword("");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        // setEmail("");
+        // setPassword("");
+      });
+  };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
 
   return (
     <div className="login">
@@ -17,7 +69,7 @@ function Login() {
         className="login__amazonLogo"
       />
       <div className="login__formContainer">
-        <form onSubmit={handleSubmit} className="login__form">
+        <form className="login__form">
           <h2>Sign-In</h2>
           <div>
             <label htmlFor="email" className="login__formLabel">
@@ -43,7 +95,11 @@ function Login() {
               className="login__formInput"
             />
           </div>
-          <button type="submit" className="login__formButton">
+          <button
+            type="button"
+            onClick={handleSignin}
+            className="login__formButton"
+          >
             Sign In
           </button>
         </form>
@@ -53,7 +109,7 @@ function Login() {
             see our Privacy Notice, our Cookie Notice and our Interest Base-ads
             Notice.
           </p>
-          <button className="login__signupButton">
+          <button onClick={handleCreateAccount} className="login__signupButton">
             Create your Amazon Account
           </button>
         </div>

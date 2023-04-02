@@ -58,7 +58,7 @@ function Home() {
           }
 
           return (
-            <div className={`home__imageContainer ${position}`}>
+            <div key={itemIndex} className={`home__imageContainer ${position}`}>
               <img src={image} alt="Amazon cover" className={`home__image`} />
             </div>
           );

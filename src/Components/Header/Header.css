@@ -32,7 +32,7 @@
 .header__searchInput {
   /* height: 12px; */
   height: 100%;
-  /* padding: 10px; */
+  font-size: 16px;
   outline: none;
   padding: 0 10px;
   border: none;
@@ -50,11 +50,13 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  position: relative;
 }
 
 .header__link {
   text-decoration: none;
   color: white;
+  cursor: pointer;
 }
 
 .header__option {
@@ -85,3 +87,53 @@
     display: block;
   }
 } */
+
+.header__Logout {
+  width: 300px;
+  height: 70px;
+  background-color: #f1f1f5;
+  color: #2e81f4;
+  border-radius: 5px;
+  position: absolute;
+  top: 45px;
+  left: 0px;
+  padding: 40px 20px;
+  display: none;
+  box-shadow: 0px 5px 8px -9px rgba(0, 0, 0, 0.75);
+}
+
+.header__Logout.show {
+  display: block;
+}
+
+.header__Logout > .button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.header__Logout > .button:hover > p {
+  color: #2e81f4;
+  cursor: pointer;
+}
+
+.header__Logout > .button > .icon {
+  color: black;
+}
+.header__Logout > .button > p {
+  font-weight: 500;
+  color: black;
+}
+
+.icon__cancel {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 20px;
+  color: black;
+}
+
+.icon__cancel:hover {
+  color: blue;
+}
