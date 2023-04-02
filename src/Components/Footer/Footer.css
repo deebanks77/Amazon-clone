@@ -69,6 +69,10 @@
   cursor: pointer;
 }
 
+.footer p:hover {
+  text-decoration: underline;
+}
+
 @media only screen and (max-width: 950px) {
   .footer__top .info4 {
     display: none;
