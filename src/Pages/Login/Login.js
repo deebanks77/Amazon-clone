@@ -11,6 +11,7 @@ import useStateValue from "../../StateProvider/StateProvider";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const [{ user }, dispatch] = useStateValue();
 
@@ -30,6 +31,12 @@ function Login() {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        setError("Invalid email or password");
+        setTimeout(() => {
+          const timeout = setError("");
+
+          clearTimeout(timeout);
+        }, 2000);
         // setEmail("");
         // setPassword("");
       });
@@ -50,6 +57,12 @@ function Login() {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode);
+        setError("Password is too weak");
+        setTimeout(() => {
+          const timeout = setError("");
+
+          clearTimeout(timeout);
+        }, 2000);
         // setEmail("");
         // setPassword("");
       });
@@ -85,7 +98,8 @@ function Login() {
           </div>
           <div>
             <label htmlFor="password" className="login__formLabel">
-              Password
+              Password{" "}
+              {error && <span className="login__error-message">{error}</span>}
             </label>
             <input
               type="password"

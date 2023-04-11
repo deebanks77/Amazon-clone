@@ -84,3 +84,8 @@
   background-color: goldenrod;
   cursor: pointer;
 }
+
+.login__error-message {
+  color: crimson;
+  margin-left: 20px;
+}
